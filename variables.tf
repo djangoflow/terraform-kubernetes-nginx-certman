@@ -3,7 +3,7 @@ variable "nginx_load_balancer_ip" {
 }
 
 variable "letsencrypt_issuer_name" {
-  default = "letsencrypt"
+  default = "letsencrypt-prod"
 }
 
 variable "letsencrypt_admin_email" {

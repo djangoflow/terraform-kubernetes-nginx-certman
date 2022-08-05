@@ -54,18 +54,18 @@ resource "kubernetes_manifest" "cluster-issuer" {
   depends_on = [
     helm_release.cert-manager
   ]
-
+  count    = helm_release.cert-manager.status == "deployed" ? 1 : 0
   manifest = {
     apiVersion : "cert-manager.io/v1"
     kind : "ClusterIssuer"
     metadata = {
-      name : var.letsencrypt_issuer_name
+      name =  var.letsencrypt_issuer_name
     },
     spec = {
       "acme" = {
         "email"               = var.letsencrypt_admin_email
         "privateKeySecretRef" = {
-          "name" = "letsencrypt-prod"
+          "name" = var.letsencrypt_issuer_name
         }
         "server"  = "https://acme-v02.api.letsencrypt.org/directory"
         "solvers" = [
