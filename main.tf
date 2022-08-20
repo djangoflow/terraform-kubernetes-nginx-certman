@@ -54,7 +54,7 @@ resource "kubernetes_manifest" "cluster-issuer" {
   depends_on = [
     helm_release.cert-manager
   ]
-  count    = helm_release.cert-manager.status == "deployed" ? 1 : 0
+  count    = var.create_cluster_issuer ? 1 : 0
   manifest = {
     apiVersion : "cert-manager.io/v1"
     kind : "ClusterIssuer"

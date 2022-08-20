@@ -26,3 +26,9 @@ variable "nginx_namespace" {
 variable "cert_manager_namespace" {
   default = "cert-manager"
 }
+
+variable "create_cluster_issuer" {
+  description = "Set to true after initial install"
+  type = bool
+  default = false
+}
