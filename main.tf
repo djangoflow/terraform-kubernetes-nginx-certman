@@ -23,6 +23,7 @@ resource "helm_release" "nginx" {
           enabled : false
         }
         config : {
+          allow-snippet-annotations : "true"
           use-geoip2 : "false"
           log-format-escape-json : "true"
           proxy-set-headers : "true"
@@ -59,7 +60,7 @@ resource "kubernetes_manifest" "cluster-issuer" {
     apiVersion : "cert-manager.io/v1"
     kind : "ClusterIssuer"
     metadata = {
-      name =  var.letsencrypt_issuer_name
+      name = var.letsencrypt_issuer_name
     },
     spec = {
       "acme" = {
